@@ -1,0 +1,24 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+let musiqueSchema = new Schema ({
+url: {
+    type: String,
+    required: true
+},
+nom: {
+    type: String,
+    required: "Le nom est requis"
+},
+prénom: {
+    type: String,
+    required: "Le nom est requis"
+},
+created_at: {
+    type: Date,
+    default: Date.now
+}
+
+});
+
+module.exports = mongoose.model('musique', musiqueSchema);
