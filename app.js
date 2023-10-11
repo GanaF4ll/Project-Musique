@@ -10,10 +10,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/apinode');
 app.use(express.urlencoded());
 app.use(express.json());
 
-// ancienne version musiqueRoute(app);
+
  const musiqueRoute = require('./routes/musiqueRoute');
  const voteRoute = require('./routes/voteRoute');
-// nouvelle version
+
 app.use('/musiques', musiqueRoute);
 app.use('/', voteRoute);
 
