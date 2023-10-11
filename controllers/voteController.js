@@ -15,7 +15,7 @@ exports.listAllvotes = async(req, res) => {
    }
 }
 
-// musique
+// post
 exports.createAvote = async (req,res) => {
 
   try {
