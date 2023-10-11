@@ -1,14 +1,14 @@
 const musique = require('../models/musiqueModel');
+const musique = require('../models/musiqueModel');
 
-
-//  get
-exports.listAllMusiques = async(req, res) => {
+// get
+exports.listAllmusiques = async(req, res) => {
 
    try {
-    const musiques = await musique.find({});
-    res.status(200);
-    res.json(musiques);
-   } catch (error) {
+    const musiques = await musique.find({musique_id: req.params.id_musique});
+    res.status(200).json(musiques);
+   } 
+   catch (error) {
     res.status(500);
     console.log(error);
     res.json({message: 'Erreur serveur'})
@@ -17,20 +17,28 @@ exports.listAllMusiques = async(req, res) => {
 
 // post
 exports.createAMusique = async (req,res) => {
-const newMusique = new musique(req.body);
 
+  try {
+    await musique.findById(req.params.id_musique);
+    const newmusique = new musique({...req.body, musique_id: req.params.id_musique});
+        
     try {
-    const musiques = await newMusique.save();
-    res.status(201);
-    res.json(musique);
-   } catch (error) {
+      const musiques = await newmusique.save();
+      res.status(201);
+      res.json({message: 'Musique ajoutée'});
+    } 
+    catch (error) {
+      res.status(500);
+      console.log(error);
+      res.json({message: 'Erreur serveur(db)'});
+    }
+  } 
+  catch (error) {
     res.status(500);
     console.log(error);
-    res.json({message: 'Erreur serveur'})
-   }
- }
-
-
+    res.json({message: 'Erreur serveur (musique inexistante)'});
+  }
+}
 
 
 // put
@@ -52,28 +60,43 @@ exports.updateAMusique = async (req, res) => {
 
 // delete
 exports.deleteAMusique = async (req, res) => {
-
-   try {
-   await musique.findByIdAndDelete(req.params.id_musique);
-    res.status(200);
-    res.json({message: 'Article Supprimé'});
-   } catch (error) {
-    res.status(500);
-    console.log(error);
-    res.json({message: 'Cannot delete'})
-   }
+    try {
+        const existingmusique = await musique.findById(req.params.id_musique);
+        if (!existingmusique) {
+            res.status(500);
+            res.json({ message: 'musique not found' });
+        } else {
+       
+            await musique.findByIdAndDelete(req.params.id_musique);
+            res.status(200);
+            res.json({message: `musique supprimé`});
+        }
+    } catch (error) {
+        res.status(500);
+        console.error(error);
+        res.json({ message: 'Cannot delete', error: error.message });
+    }
 }
 
-// get A musique
+
+//  get A musique
 exports.getAMusique = async (req, res) => {
 
    try {
-   await musique.findById(req.params.id_musique);
-    res.status(200);
-    res.json({message: 'saved'});
-   } catch (error) {
+const existingmusique = await musique.findById(req.params.id_musique);
+if (!exisitingmusique) {
+  res.status(500);
+  res.json({message: `la musique n'existe pas`})
+}
+else {
+    await musique.findByIdAndDelete(req.params.id_musique);
+  res.status(200);
+  res.json(req.params.id_musique)
+}
+  }
+  catch (error) {
     res.status(500);
     console.log(error);
-    res.json({message: 'Cannot save'})
+    res.json({message: `La musique n'existe plus`})
    }
 }
