@@ -5,13 +5,14 @@
     router
     .route('/')
     .get(musiqueController.listAllMusiques)
-    .post(musiqueController.createAMusique);
+    // .get(musiqueController.listAllMusicVote)
+    // .post(musiqueController.createAMusique);
 
 
-        router
-        .route('/:id_musique')
-        .get(musiqueController.getAMusique)
-        .delete(musiqueController.deleteAMusique)
-        .put(musiqueController.updateAMusique);
+    //     router
+    //     .route('/:id_musique')
+    //     .get(musiqueController.getAMusique)
+    //     .delete(musiqueController.deleteAMusique)
+    //     .put(musiqueController.updateAMusique);
 
-        module.exports = router;
+    //     module.exports = router;
