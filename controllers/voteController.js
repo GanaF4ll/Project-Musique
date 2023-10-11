@@ -2,7 +2,7 @@ const vote = require('../models/voteModel');
 const musique = require('../models/musiqueModel');
 
 // get
-exports.listAllvotes = async(req, res) => {
+exports.listAllVotes = async(req, res) => {
 
    try {
     const votes = await vote.find({musique_id: req.params.id_musique});
@@ -41,62 +41,62 @@ exports.createAvote = async (req,res) => {
 }
 
 
-// // // put
-// exports.updateAvote = async (req, res) => {
-//   try {
-//     const vote = await vote.findByIdAndUpdate(req.params.id_vote, req.body, {new: true});
-//     res.status(200);
-//     res.json(vote);
+// put
+exports.updateAvote = async (req, res) => {
+  try {
+    const vote = await vote.findByIdAndUpdate(req.params.id_vote, req.body, {new: true});
+    res.status(200);
+    res.json(vote);
     
-//   } catch (error) {
-//     res.status(500);
-//     console.log(error);
-//     res.status(500)
-//     res.json({ message: 'Erreur serveur' })
-//   }
-// }
+  } catch (error) {
+    res.status(500);
+    console.log(error);
+    res.status(500)
+    res.json({ message: 'Erreur serveur' })
+  }
+}
 
 
 
-// // // delete
-// exports.deleteAvote = async (req, res) => {
-//     try {
-//         const existingvote = await vote.findById(req.params.id_vote);
-//         if (!existingvote) {
-//             res.status(500);
-//             res.json({ message: 'vote not found' });
-//         } else {
+// delete
+exports.deleteAvote = async (req, res) => {
+    try {
+        const existingvote = await vote.findById(req.params.id_vote);
+        if (!existingvote) {
+            res.status(500);
+            res.json({ message: 'vote not found' });
+        } else {
        
-//             await vote.findByIdAndDelete(req.params.id_vote);
-//             res.status(200);
-//             res.json({message: `message supprimé`});
-//         }
-//     } catch (error) {
-//         res.status(500);
-//         console.error(error);
-//         res.json({ message: 'Cannot delete', error: error.message });
-//     }
-// }
+            await vote.findByIdAndDelete(req.params.id_vote);
+            res.status(200);
+            res.json({message: `message supprimé`});
+        }
+    } catch (error) {
+        res.status(500);
+        console.error(error);
+        res.json({ message: 'Cannot delete', error: error.message });
+    }
+}
 
 
-// //  get A vote
-// exports.getAvote = async (req, res) => {
+//  get A vote
+exports.getAvote = async (req, res) => {
 
-//    try {
-// const existingvote = await vote.findById(req.params.id_vote);
-// if (!exisitingvote) {
-//   res.status(500);
-//   res.json({message: `le voteaire n'existe pas`})
-// }
-// else {
-//     await vote.findByIdAndDelete(req.params.id_vote);
-//   res.status(200);
-//   res.json(req.params.id_vote)
-// }
-//   }
-//   catch (error) {
-//     res.status(500);
-//     console.log(error);
-//     res.json({message: `Le voteaire n'existe plus`})
-//    }
-// }
+   try {
+const existingvote = await vote.findById(req.params.id_vote);
+if (!exisitingvote) {
+  res.status(500);
+  res.json({message: `le voteaire n'existe pas`})
+}
+else {
+    await vote.findByIdAndDelete(req.params.id_vote);
+  res.status(200);
+  res.json(req.params.id_vote)
+}
+  }
+  catch (error) {
+    res.status(500);
+    console.log(error);
+    res.json({message: `Le voteaire n'existe plus`})
+   }
+}

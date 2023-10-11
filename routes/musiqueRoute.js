@@ -1,17 +1,17 @@
-const express = require('express');
-const router = express.Router();
+    const express = require('express');
+    const router = express.Router();
 
-const musiqueController = require('../controllers/musiqueController');
-router
-.route('/')
-.get(musiqueController.listAllmusiques)
-.post(musiqueController.createAmusique);
-
-
+    const musiqueController = require('../controllers/musiqueController');
     router
-    .route('/:id_musique')
-    .get(musiqueController.getAmusique)
-    .delete(musiqueController.deleteAmusique)
-    .put(musiqueController.updateAmusique);
+    .route('/')
+    .get(musiqueController.listAllmusiques)
+    .post(musiqueController.createAmusique);
 
-    module.exports = router;
+
+        router
+        .route('/:id_musique')
+        .get(musiqueController.getAmusique)
+        .delete(musiqueController.deleteAmusique)
+        .put(musiqueController.updateAmusique);
+
+        module.exports = router;

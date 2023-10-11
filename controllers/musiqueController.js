@@ -1,102 +1,79 @@
-const vote = require('../models/voteModel');
 const musique = require('../models/musiqueModel');
 
-// get
-exports.listAllvotes = async(req, res) => {
+
+//  get
+exports.listAllMusiques = async(req, res) => {
 
    try {
-    const votes = await vote.find({musique_id: req.params.id_musique});
-    res.status(200).json(votes);
-   } 
-   catch (error) {
+    const musiques = await musique.find({});
+    res.status(200);
+    res.json(musiques);
+   } catch (error) {
     res.status(500);
     console.log(error);
     res.json({message: 'Erreur serveur'})
    }
 }
 
-// musique
-exports.createAvote = async (req,res) => {
+// post
+exports.createAMusique = async (req,res) => {
+const newMusique = new musique(req.body);
 
-  try {
-    await musique.findById(req.params.id_musique);
-    const newvote = new vote({...req.body, musique_id: req.params.id_musique});
-        
     try {
-      const votes = await newvote.save();
-      res.status(201);
-      res.json({message: 'Message crée'});
-    } 
-    catch (error) {
-      res.status(500);
-      console.log(error);
-      res.json({message: 'Erreur serveur(db)'});
-    }
-  } 
-  catch (error) {
+    const musiques = await newMusique.save();
+    res.status(201);
+    res.json(musique);
+   } catch (error) {
     res.status(500);
     console.log(error);
-    res.json({message: 'Erreur serveur (musique inexistant)'});
+    res.json({message: 'Erreur serveur'})
+   }
+ }
+
+
+
+
+// put
+exports.updateAMusique = async (req, res) => {
+  try {
+    const musique = await musique.findByIdAndUpdate(req.params.id_musique, req.body, {new: true});
+    res.status(200);
+    res.json(musique);
+    
+  } catch (error) {
+    res.status(500);
+    console.log(error);
+    res.status(500)
+    res.json({ message: 'Erreur serveur' })
   }
 }
 
 
-// // // put
-// exports.updateAvote = async (req, res) => {
-//   try {
-//     const vote = await vote.findByIdAndUpdate(req.params.id_vote, req.body, {new: true});
-//     res.status(200);
-//     res.json(vote);
-    
-//   } catch (error) {
-//     res.status(500);
-//     console.log(error);
-//     res.status(500)
-//     res.json({ message: 'Erreur serveur' })
-//   }
-// }
 
+// delete
+exports.deleteAMusique = async (req, res) => {
 
+   try {
+   await musique.findByIdAndDelete(req.params.id_musique);
+    res.status(200);
+    res.json({message: 'Article Supprimé'});
+   } catch (error) {
+    res.status(500);
+    console.log(error);
+    res.json({message: 'Cannot delete'})
+   }
+}
 
-// // // delete
-// exports.deleteAvote = async (req, res) => {
-//     try {
-//         const existingvote = await vote.findById(req.params.id_vote);
-//         if (!existingvote) {
-//             res.status(500);
-//             res.json({ message: 'vote not found' });
-//         } else {
-       
-//             await vote.findByIdAndDelete(req.params.id_vote);
-//             res.status(200);
-//             res.json({message: `message supprimé`});
-//         }
-//     } catch (error) {
-//         res.status(500);
-//         console.error(error);
-//         res.json({ message: 'Cannot delete', error: error.message });
-//     }
-// }
+// get A musique
+exports.getAMusique = async (req, res) => {
 
-
-// //  get A vote
-// exports.getAvote = async (req, res) => {
-
-//    try {
-// const existingvote = await vote.findById(req.params.id_vote);
-// if (!exisitingvote) {
-//   res.status(500);
-//   res.json({message: `le voteaire n'existe pas`})
-// }
-// else {
-//     await vote.findByIdAndDelete(req.params.id_vote);
-//   res.status(200);
-//   res.json(req.params.id_vote)
-// }
-//   }
-//   catch (error) {
-//     res.status(500);
-//     console.log(error);
-//     res.json({message: `Le voteaire n'existe plus`})
-//    }
-// }
+   try {
+   await musique.findById(req.params.id_musique);
+    res.status(200);
+    res.json({message: 'saved'});
+   } catch (error) {
+    res.status(500);
+    console.log(error);
+    res.json({message: 'Cannot save'})
+   }
+}
