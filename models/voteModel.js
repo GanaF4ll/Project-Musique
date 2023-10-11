@@ -9,7 +9,7 @@
         max : 5,
         validate: {
         validator: Number.isInteger,
-        message: 'Le champ doit être un nombre entier.'
+        message: 'Le champ doit être un nombre entier compris entre 1 et 5'
     }
     },
     dateDeSoumission: {
