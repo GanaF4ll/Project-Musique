@@ -12,10 +12,10 @@
 
 
     const musiqueRoute = require('./routes/musiqueRoute');
-    // const voteRoute = require('./routes/voteRoute');
+    const voteRoute = require('./routes/voteRoute');
 
     app.use('/musiques', musiqueRoute);
-    // app.use('/', voteRoute);
+    app.use('/', voteRoute);
 
 
 

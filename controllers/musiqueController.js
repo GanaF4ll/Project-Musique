@@ -39,76 +39,76 @@ exports.createAMusique = async (req,res) => {
 }
 
 
-// // put
-// exports.updateAMusique = async (req, res) => {
-//   try {
-//     const musique = await musique.findByIdAndUpdate(req.params.id_musique, req.body, {new: true});
-//     res.status(200);
-//     res.json(musique);
+// put
+exports.updateAMusique = async (req, res) => {
+  try {
+    const musique = await musique.findByIdAndUpdate(req.params.id_musique, req.body, {new: true});
+    res.status(200);
+    res.json(musique);
     
-//   } catch (error) {
-//     res.status(500);
-//     console.log(error);
-//     res.status(500)
-//     res.json({ message: 'Erreur serveur' })
-//   }
-// }
+  } catch (error) {
+    res.status(500);
+    console.log(error);
+    res.status(500)
+    res.json({ message: 'Erreur serveur' })
+  }
+}
 
 
 
-// // delete
-// exports.deleteAMusique = async (req, res) => {
-//     try {
-//         const existingmusique = await musique.findById(req.params.id_musique);
-//         if (!existingmusique) {
-//             res.status(500);
-//             res.json({ message: 'musique not found' });
-//         } else {
+// delete
+exports.deleteAMusique = async (req, res) => {
+    try {
+        const existingmusique = await musique.findById(req.params.id_musique);
+        if (!existingmusique) {
+            res.status(500);
+            res.json({ message: 'musique not found' });
+        } else {
        
-//             await musique.findByIdAndDelete(req.params.id_musique);
-//             res.status(200);
-//             res.json({message: `musique supprimé`});
-//         }
-//     } catch (error) {
-//         res.status(500);
-//         console.error(error);
-//         res.json({ message: 'Cannot delete', error: error.message });
-//     }
-// }
+            await musique.findByIdAndDelete(req.params.id_musique);
+            res.status(200);
+            res.json({message: `musique supprimé`});
+        }
+    } catch (error) {
+        res.status(500);
+        console.error(error);
+        res.json({ message: 'Cannot delete', error: error.message });
+    }
+}
 
 
-// //  get A musique
-// exports.getAMusique = async (req, res) => {
+//  get A musique
+exports.getAMusique = async (req, res) => {
 
-//    try {
-// const existingmusique = await musique.findById(req.params.id_musique);
-// if (!exisitingmusique) {
-//   res.status(500);
-//   res.json({message: `la musique n'existe pas`})
-// }
-// else {
-//     await musique.findByIdAndDelete(req.params.id_musique);
-//   res.status(200);
-//   res.json(req.params.id_musique)
-// }
-//   }
-//   catch (error) {
-//     res.status(500);
-//     console.log(error);
-//     res.json({message: `La musique n'existe plus`})
-//    }
-// }
+   try {
+const existingmusique = await musique.findById(req.params.id_musique);
+if (!exisitingmusique) {
+  res.status(500);
+  res.json({message: `la musique n'existe pas`})
+}
+else {
+    await musique.findByIdAndDelete(req.params.id_musique);
+  res.status(200);
+  res.json(req.params.id_musique)
+}
+  }
+  catch (error) {
+    res.status(500);
+    console.log(error);
+    res.json({message: `La musique n'existe plus`})
+   }
+}
 
-// exports.listAllMusicVote = async(req, res) => {
+exports.listAllMusicVote = async(req, res) => {
 
-//    try {
-//     const musiques = await musique.find({musique_id: req.params.id_musique});
-//     const votes = await vote.find({vote_id: req.params.id_vote});
-//     res.status(200).json(musiques);
-//    } 
-//    catch (error) {
-//     res.status(500);
-//     console.log(error);
-//     res.json({message: 'Erreur serveur'})
-//    }
-// }
+   try {
+    const musiques = await musique.find({musique_id: req.params.id_musique});
+    const votes = await vote.find({vote_id: req.params.id_vote});
+    res.status(200).json(musiques);
+   } 
+   catch (error) {
+    res.status(500);
+    console.log(error);
+    res.json({message: 'Erreur serveur'})
+   }
+}
