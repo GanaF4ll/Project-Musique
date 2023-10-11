@@ -2,7 +2,6 @@ const musique = require('../models/musiqueModel');
 
 // get
 exports.listAllmusiques = async(req, res) => {
-
    try {
     const musiques = await musique.find({musique_id: req.params.id_musique});
     res.status(200).json(musiques);

@@ -4,7 +4,7 @@
     const musiqueController = require('../controllers/musiqueController');
     router
     .route('/')
-    .get(musiqueController.listAllMusiques)
+    .get(musiqueController.listAllmusiques)
     // .get(musiqueController.listAllMusicVote)
     // .post(musiqueController.createAMusique);
 
@@ -15,4 +15,4 @@
     //     .delete(musiqueController.deleteAMusique)
     //     .put(musiqueController.updateAMusique);
 
-    //     module.exports = router;
+        module.exports = router;
