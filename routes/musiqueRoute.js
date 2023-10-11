@@ -6,7 +6,7 @@
     .route('/')
     .get(musiqueController.listAllmusiques)
     // .get(musiqueController.listAllMusicVote)
-    // .post(musiqueController.createAMusique);
+    .post(musiqueController.createAMusique);
 
 
     //     router

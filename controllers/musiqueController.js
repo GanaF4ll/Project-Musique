@@ -13,30 +13,30 @@ exports.listAllmusiques = async(req, res) => {
    }
 }
 
-// // post
-// exports.createAMusique = async (req,res) => {
+// post
+exports.createAMusique = async (req,res) => {
 
-//   try {
-//     await musique.findById(req.params.id_musique);
-//     const newmusique = new musique({...req.body, musique_id: req.params.id_musique});
+  try {
+    await musique.findById(req.params.id_musique);
+    const newmusique = new musique({...req.body, musique_id: req.params.id_musique});
         
-//     try {
-//       const musiques = await newmusique.save();
-//       res.status(201);
-//       res.json({message: 'Musique ajoutée'});
-//     } 
-//     catch (error) {
-//       res.status(500);
-//       console.log(error);
-//       res.json({message: 'Erreur serveur(db)'});
-//     }
-//   } 
-//   catch (error) {
-//     res.status(500);
-//     console.log(error);
-//     res.json({message: 'Erreur serveur (musique inexistante)'});
-//   }
-// }
+    try {
+      const musiques = await newmusique.save();
+      res.status(201);
+      res.json({message: 'Musique ajoutée'});
+    } 
+    catch (error) {
+      res.status(500);
+      console.log(error);
+      res.json({message: 'Erreur serveur(db)'});
+    }
+  } 
+  catch (error) {
+    res.status(500);
+    console.log(error);
+    res.json({message: 'Erreur serveur (musique inexistante)'});
+  }
+}
 
 
 // // put
